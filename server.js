@@ -14,7 +14,7 @@ app.use(express.static('build'))
 const db = mysql.createConnection({
     host: process.env.MYSQL_HOST || 'localhost',
     user: process.env.MYSQL_USER || 'root',
-    password: 'Karl0998pos',
+    password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE || 'lab'
 })
 
