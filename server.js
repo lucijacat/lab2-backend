@@ -121,6 +121,7 @@ app.get('/search', (req, res) => {
                 console.error('Error executing search query');
                 return res.status(500).json({ error: 'Internal Server Error' });
             }
+            console.log(result);
             return res.json(result);
         })
     
