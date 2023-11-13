@@ -33,7 +33,7 @@ app.post('/login', (req, res) => {
     const broken = req.body.broken;
 
     if(broken === true) {
-        db.query(`SELECT * FROM users WHERE user = ?`,
+        db.query(`SELECT * FROM users WHERE username = ?`,
         [username], 
         (err, result) => {
             if(err) {
@@ -50,7 +50,7 @@ app.post('/login', (req, res) => {
             }
         })
     } else {
-        db.query(`SELECT * FROM users WHERE user = ?`,
+        db.query(`SELECT * FROM users WHERE username = ?`,
         [username], 
         (err, result) => {
             if(err) {
@@ -79,7 +79,7 @@ app.post('/register', (req, res) => {
     const broken = req.body.broken;
 
     if(broken === true) {
-        db.query(`INSERT INTO users (user, password) VALUES (?,?)`, 
+        db.query(`INSERT INTO users (username, password) VALUES (?,?)`, 
         [username, password], 
         (err, result) => {
             res.send({err: err});
@@ -95,7 +95,7 @@ app.post('/register', (req, res) => {
             if(err) {
                 res.send({err: err});
             }
-            db.query(`INSERT INTO users (user, password) VALUES (?,?)`, 
+            db.query(`INSERT INTO users (username, password) VALUES (?,?)`, 
             [username, hash], 
             (err, result) => {
                 console.log(err)
@@ -115,7 +115,7 @@ app.get('/search', (req, res) => {
     }
 
     if (injection === "true") {
-        const sql = `SELECT * FROM books WHERE name = "` + searchQuery + `"`;
+        const sql = `SELECT * FROM books WHERE title = "` + searchQuery + `"`;
         db.query(sql, (err, result) => {
             if (err) {
                 console.error('Error executing search query');
@@ -125,7 +125,7 @@ app.get('/search', (req, res) => {
         })
     
     } else {
-        const sql = `SELECT * FROM books WHERE name = ?`;
+        const sql = `SELECT * FROM books WHERE title = ?`;
         const searchTerm = `${searchQuery}`
         db.query(sql, [searchTerm], (err, result) => {
             if (err) {
