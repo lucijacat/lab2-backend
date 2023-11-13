@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 const app = express()
-const port = 8800
 
 app.use(express.json())
 app.use(cors())
@@ -136,6 +135,7 @@ app.get('/search', (req, res) => {
     }
 })
 
+const port = process.env.PORT || 8800
 app.listen(port, () => {
   console.log(`Server is online on port: ${port}`)
 })
