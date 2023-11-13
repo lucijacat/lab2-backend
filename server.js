@@ -9,6 +9,7 @@ const port = 8800
 
 app.use(express.json())
 app.use(cors())
+app.use(express.static('build'))
 
 const db = mysql.createConnection({
     host: process.env.MYSQL_HOST || 'localhost',
