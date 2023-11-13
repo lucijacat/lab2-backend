@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
     const sql = "SELECT * FROM books";
     db.query(sql, (err, result) => {
         if(err) return res.json(err);
-        console.log(result)
         return res.json(result);
     })
 })
